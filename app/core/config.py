@@ -4,6 +4,8 @@ class Settings(BaseSettings):
     app_name: str = "Smart Task Manager"
     debug: bool = False
 
+    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/tasks_db"
+
     class Config:
         env_file = ".env"
 
