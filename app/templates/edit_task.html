@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Edit Task</h2>
+
+<form method="post">
+    <label>Task description</label><br>
+    <textarea name="original_text"
+              rows="5"
+              cols="60"
+              required>{{ task.original_text }}</textarea><br><br>
+
+    <button type="submit">💾 Save & Re-analyze</button>
+</form>
+
+<br>
+<a href="/tasks/{{ task.id }}">← Back to task</a>
+
+{% endblock %}

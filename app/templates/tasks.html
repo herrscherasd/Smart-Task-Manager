@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/tasks/new">➕ New task</a>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Category</th>
+        <th>Time</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <td>
+    <a href="/tasks/{{ task.id }}">{{ task.title }}</a>
+</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.category }}</td>
+        <td>{{ task.estimated_minutes }} min</td>
+        <td>
+    <a href="/tasks/{{ task.id }}">👁</a>
+    <a href="/tasks/{{ task.id }}/edit">✏️</a>
+
+    <form method="post"
+          action="/tasks/{{ task.id }}/delete"
+          style="display:inline">
+        <button type="submit">❌</button>
+    </form>
+</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

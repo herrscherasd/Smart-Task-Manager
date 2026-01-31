@@ -5,31 +5,17 @@ from sqlalchemy import select
 from app.db.models import Task
 from app.db.session import get_session
 from app.schemas.task import TaskCreate, TaskRead
-from app.services.ai_service import analyze_task
+from app.services.task_service import create_task
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 
 @router.post("/", response_model=TaskRead)
-async def create_task(
+async def create_task_api(
     data: TaskCreate,
     session: AsyncSession = Depends(get_session),
 ):
-    analysis = analyze_task(data.original_text)
-
-    task = Task(
-        original_text=data.original_text,
-        title=analysis.title,
-        priority=analysis.priority,
-        category=analysis.category,
-        estimated_minutes=analysis.estimated_minutes,
-        subtasks="; ".join(analysis.subtasks),
-    )
-
-    session.add(task)
-    await session.commit()
-    await session.refresh(task)
-    return task
+    return await create_task(session, data.original_text)
 
 
 @router.get("/", response_model=list[TaskRead])
