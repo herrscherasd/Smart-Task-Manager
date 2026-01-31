@@ -4,7 +4,8 @@ class Settings(BaseSettings):
     app_name: str = "Smart Task Manager"
     debug: bool = False
 
-    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/tasks_db"
+    database_url: str
+    database_url_sync: str
 
     gemini_api_key: str
     gemini_model: str = "gemini-1.5-flash"
