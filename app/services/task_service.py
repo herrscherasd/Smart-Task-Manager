@@ -8,7 +8,7 @@ def fallback_analysis(text: str):
         "priority": "Medium",
         "category": "Other",
         "estimated_minutes": 30,
-        "subtasks": ["This subtask was created due to an error. Try again later."],
+        "subtasks": ["This subtask was not created due to an error. Try again later."],
     }
 
 async def create_task(session: AsyncSession, text: str) -> Task:
